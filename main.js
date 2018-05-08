@@ -9,14 +9,11 @@ var db = new sqlite3.Database("/home/waderwu/code/js/dict-chrome/oald.db",functi
 });
 
 
-db.get("select translation from oald where word='apple'",function(err,row){
-
-})
+var win
 
 function createWindow () {
     // 创建一个窗口.
     win = new BrowserWindow({width: 800, height: 600})
-
     // 然后加载应用的 index.html。
     win.loadURL(url.format({
       pathname: path.join(__dirname, 'index.html'),
@@ -24,6 +21,26 @@ function createWindow () {
       slashes: true
     }))
   }
+
+
+
+
+
+
+
+ipcMain.on('find',(event,arg) =>{
+  // console.log(arg)
+  // console.log(win)
+
+  win.webContents.findInPage(arg)
+
+})
+
+ipcMain.on('esc',(event,arg) =>{
+    console.log(arg)
+    win.webContents.stopFindInPage('keepSelection')
+})
+
 
 
 ipcMain.on('search', (event, arg) => {

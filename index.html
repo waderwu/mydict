@@ -2,9 +2,21 @@
 <button type="button" onclick="func()">search</button>
 <p id="translate">no translate </p>
 
-<script>
+<p>
+Nam ultricies nulla sit amet leo vulputate ullamcorper. Pellentesque ullamcorper tortor sit amet laoreet maximus. Quisque quis velit molestie, consectetur elit id, interdum mi. Donec non diam auctor, posuere metus at, ornare nulla. Sed posuere porta risus, sed egestas dui imperdiet a. Pellentesque pellentesque mauris erat, ac posuere mauris lacinia ut. Aenean in dolor ut augue sollicitudin convallis eget in tellus. Curabitur tristique ac augue quis fermentum.
 
-const {ipcRenderer} = require('electron')
+Sed ac ligula vitae enim mattis sodales. Maecenas in mi facilisis lacus vehicula rutrum ornare et sem. Mauris vehicula sollicitudin neque et lobortis. Pellentesque magna libero, semper vitae vehicula sed, sollicitudin ut nisl. Quisque eu velit quis eros accumsan suscipit sed ac elit. Etiam eu elit vitae metus elementum vulputate. Proin augue turpis, accumsan a sollicitudin eget, luctus vitae massa. Aenean nulla erat, sodales id sagittis vitae, tincidunt eget tortor.
+
+Aenean laoreet egestas nulla vel scelerisque. Ut scelerisque vulputate pulvinar. Ut dui nisl, auctor at sagittis eget, cursus finibus orci. Aenean ac ligula eget sapien aliquam volutpat. Vestibulum augue elit, ultrices quis ornare pharetra, suscipit sed est. Donec ut tortor et erat tempor consectetur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse imperdiet turpis nec urna cursus iaculis.
+
+Integer ullamcorper mi ac lorem
+</p>
+<input type="text" id="findinpage">
+<button type="button" onclick="func2()">find</button>
+<button type="button" onclick="func3()">esc</button>
+
+<script>
+const {ipcRenderer,webContents} = require('electron')
 
 function func(){
   var word = document.getElementById("dict").value
@@ -17,4 +29,16 @@ ipcRenderer.on("translate",(event, arg) =>{
   var p = document.getElementById("translate")
   p.innerHTML = arg
 })
+
+function func2 (){
+  var txt = document.getElementById("findinpage").value
+  console.log(txt)
+  ipcRenderer.send("find",txt)
+}
+
+function func3(){
+  console.log("gg")
+  ipcRenderer.send("esc","ha")
+}
+
 </script>
