@@ -1,0 +1,20 @@
+<input type="text" id="dict">
+<button type="button" onclick="func()">search</button>
+<p id="translate">no translate </p>
+
+<script>
+
+const {ipcRenderer} = require('electron')
+
+function func(){
+  var word = document.getElementById("dict").value
+  ipcRenderer.send("search",word)
+  console.log(word)
+}
+
+ipcRenderer.on("translate",(event, arg) =>{
+  console.log(arg)
+  var p = document.getElementById("translate")
+  p.innerHTML = arg
+})
+</script>
